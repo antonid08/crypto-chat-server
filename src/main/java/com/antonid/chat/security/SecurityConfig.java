@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 @Configuration
@@ -30,33 +31,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private RestAuthEntryPoint restAuthenticationEntryPoint;
 
     private MySavedRequestAwareAuthenticationSuccessHandler authenticationSuccessHandler =
-            new MySavedRequestAwareAuthenticationSuccessHandler();
+        new MySavedRequestAwareAuthenticationSuccessHandler();
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
+        throws Exception {
 
         auth.inMemoryAuthentication()
-                .withUser("temporary").password("temporary").roles("ADMIN")
-                .and()
-                .withUser("user").password("userPass").roles("USER");
+            .withUser("temporary").password("temporary").roles("ADMIN")
+            .and()
+            .withUser("user").password("userPass").roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(restAuthenticationEntryPoint)
-                .and()
-                .authorizeRequests()
-                .antMatchers("/api/foos").authenticated()
-                .and()
-                .formLogin()
-                .successHandler(authenticationSuccessHandler)
-                .failureHandler(new SimpleUrlAuthenticationFailureHandler())
-                .and()
-                .logout();
+            .csrf().disable()
+            .exceptionHandling()
+            .authenticationEntryPoint(restAuthenticationEntryPoint)
+            .and()
+            .authorizeRequests()
+            .antMatchers("/").authenticated()
+            .and()
+            .formLogin()
+            .successHandler(authenticationSuccessHandler)
+            .failureHandler(new SimpleUrlAuthenticationFailureHandler())
+            .and()
+            .logout();
     }
 
     @Bean
@@ -71,16 +72,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private class MySavedRequestAwareAuthenticationSuccessHandler
-            extends SimpleUrlAuthenticationSuccessHandler {
+        extends SimpleUrlAuthenticationSuccessHandler {
 
         private RequestCache requestCache = new HttpSessionRequestCache();
 
         @Override
         public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                            Authentication authentication) throws ServletException, IOException {
+            Authentication authentication) throws ServletException, IOException {
 
             SavedRequest savedRequest
-                    = requestCache.getRequest(request, response);
+                = requestCache.getRequest(request, response);
 
             if (savedRequest == null) {
                 clearAuthenticationAttributes(request);
@@ -90,7 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             String targetUrlParam = getTargetUrlParameter();
 
             if (isAlwaysUseDefaultTargetUrl() ||
-                    (targetUrlParam != null && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
+                (targetUrlParam != null && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
 
                 requestCache.removeRequest(request, response);
                 clearAuthenticationAttributes(request);
