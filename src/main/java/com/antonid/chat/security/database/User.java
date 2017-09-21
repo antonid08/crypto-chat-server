@@ -1,25 +1,22 @@
 package com.antonid.chat.security.database;
 
-import com.antonid.chat.security.database.Encryption;
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 @Entity
+@Table(name="users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @Column(name = "password")
     private String password;
 
+    private Encryption encryption;
 
     public Long getId() {
         return id;
@@ -45,6 +42,7 @@ public class User {
         this.password = password;
     }
 
+    @Enumerated(EnumType.ORDINAL)
     public Encryption getEncryption() {
         return encryption;
     }
@@ -53,7 +51,6 @@ public class User {
         this.encryption = encryption;
     }
 
-    private Encryption encryption;
 
     //standard getters and setters
 }
