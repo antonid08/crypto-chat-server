@@ -110,6 +110,19 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+        <!--FCM-->
+        <dependency>
+            <groupId>de.bytefish.fcmjava</groupId>
+            <artifactId>fcmjava-core</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.bytefish.fcmjava</groupId>
+            <artifactId>fcmjava-client</artifactId>
+            <version>2.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>

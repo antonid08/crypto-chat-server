@@ -1,5 +1,7 @@
-package com.antonid.chat.security;
+package com.antonid.chat.config;
 
+import com.antonid.chat.security.DatabaseUserDetailsService;
+import com.antonid.chat.security.RestAuthEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

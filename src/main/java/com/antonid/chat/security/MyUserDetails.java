@@ -1,6 +1,6 @@
 package com.antonid.chat.security;
 
-import com.antonid.chat.security.database.User;
+import com.antonid.chat.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,6 +17,10 @@ public class MyUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     @Override

@@ -2,21 +2,20 @@ package com.antonid.chat;
 
 public class Message {
 
-    private String sender;
-
+    private String senderUsername;
     private String text;
 
-    public Message(String sender, String text) {
-        this.sender = sender;
+    public Message() {
+
+    }
+
+    public Message(String senderUsername, String text) {
+        this.senderUsername = senderUsername;
         this.text = text;
     }
 
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
+    public String getSenderUsername() {
+        return senderUsername;
     }
 
     public String getText() {

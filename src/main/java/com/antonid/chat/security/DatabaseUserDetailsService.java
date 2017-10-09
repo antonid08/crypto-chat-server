@@ -1,7 +1,7 @@
 package com.antonid.chat.security;
 
-import com.antonid.chat.security.database.User;
-import com.antonid.chat.security.database.UserRepository;
+import com.antonid.chat.models.User;
+import com.antonid.chat.models.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

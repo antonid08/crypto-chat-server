@@ -1,9 +1,9 @@
-package com.antonid.chat.security.database;
+package com.antonid.chat.models;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -16,15 +16,20 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "fcm_token")
+    private String fcmToken;
+
+    @OneToOne
     private Encryption encryption;
 
-    public Long getId() {
-        return id;
+    public String getFcmToken() {
+        return fcmToken;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setFcmToken(String token) {
+        this.fcmToken = token;
     }
+
 
     public String getUsername() {
         return username;
@@ -42,7 +47,6 @@ public class User {
         this.password = password;
     }
 
-    @Enumerated(EnumType.ORDINAL)
     public Encryption getEncryption() {
         return encryption;
     }
@@ -51,7 +55,12 @@ public class User {
         this.encryption = encryption;
     }
 
-
-    //standard getters and setters
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }
 
